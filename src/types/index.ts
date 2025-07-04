@@ -5,6 +5,7 @@ export * from "./utils";
 export * from "./user";
 export * from "./course";
 export * from "./progress";
+export * from "./enrollment";
 
 // Content types
 export * from "./mdx";

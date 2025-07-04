@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { DifficultyBadge, CourseMeta } from "@/components/shared";
+import { CourseEnrollmentButton } from "@/components/course/course-enrollment";
 import Link from "next/link";
 import type { Course } from "@/types/course";
 
@@ -86,13 +87,17 @@ const CourseCard = ({
                      </span>
                   </div>
 
-                  <Button asChild>
-                     <Link href={`/courses/${course.slug}`}>
-                        {showProgress && progress > 0
-                           ? "Continue"
-                           : "Start Course"}
-                     </Link>
-                  </Button>
+                  <div className='flex gap-2'>
+                     <CourseEnrollmentButton
+                        course={course}
+                        variant='compact'
+                     />
+                     <Button variant='outline' size='sm' asChild>
+                        <Link href={`/courses/${course.slug}`}>
+                           View Details
+                        </Link>
+                     </Button>
+                  </div>
                </div>
             </div>
          </CardContent>

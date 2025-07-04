@@ -18,6 +18,8 @@ import {
    CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { CourseEnrollmentButton } from "@/components/course/course-enrollment";
+import { CourseRatings } from "@/components/course/course-ratings";
 import {
    Clock,
    BookOpen,
@@ -144,12 +146,11 @@ export function CourseOverview({ course }: CourseOverviewProps) {
                         )}
 
                         <div className='flex gap-3'>
-                           <Button className='flex-1'>
-                              <Play className='w-4 h-4 mr-2' />
-                              {progressPercentage > 0
-                                 ? "Continue Learning"
-                                 : "Start Learning"}
-                           </Button>
+                           <CourseEnrollmentButton
+                              course={course}
+                              variant='detailed'
+                              className='flex-1'
+                           />
                            <Button variant='outline'>
                               <BookOpen className='w-4 h-4 mr-2' />
                               Course Overview
@@ -304,6 +305,11 @@ export function CourseOverview({ course }: CourseOverviewProps) {
                )}
             </motion.div>
          </div>
+
+         {/* Course Ratings */}
+         <motion.div variants={itemVariants} className='mt-8'>
+            <CourseRatings course={course} />
+         </motion.div>
       </motion.div>
    );
 }

@@ -3,7 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, User, BookOpen, Settings, LogOut } from "lucide-react";
+import {
+   Menu,
+   X,
+   User,
+   BookOpen,
+   Settings,
+   LogOut,
+   BarChart3,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
    DropdownMenu,
@@ -22,6 +30,7 @@ const Header = () => {
 
    const navigation = [
       { name: "Courses", href: "/courses" },
+      { name: "Dashboard", href: "/dashboard" },
       { name: "Learning Path", href: "/learning-path" },
       { name: "Progress", href: "/progress" },
       { name: "Community", href: "/community" },
@@ -83,6 +92,12 @@ const Header = () => {
                            </div>
                         </div>
                         <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                           <Link href='/dashboard'>
+                              <BarChart3 className='mr-2 h-4 w-4' />
+                              Dashboard
+                           </Link>
+                        </DropdownMenuItem>
                         <DropdownMenuItem asChild>
                            <Link href='/profile'>
                               <User className='mr-2 h-4 w-4' />
