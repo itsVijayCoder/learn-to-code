@@ -29,7 +29,7 @@ export interface MDXContent {
  * MDX component props interface
  */
 export interface MDXComponents {
-  readonly [key: string]: React.ComponentType<any>
+  readonly [key: string]: React.ComponentType<Record<string, unknown>>
 }
 
 /**
