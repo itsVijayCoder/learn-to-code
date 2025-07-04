@@ -8,6 +8,7 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -32,7 +33,6 @@ import {
    CheckCircle2,
 } from "lucide-react";
 import { useEnrollmentStore } from "@/stores";
-import { useAuthStore } from "@/stores";
 import type { UserId } from "@/types";
 
 interface UserDashboardProps {
@@ -58,7 +58,8 @@ const itemVariants = {
 const toUserId = (id: string): UserId => id as UserId;
 
 export function UserDashboard({ className }: UserDashboardProps) {
-   const { user } = useAuthStore();
+   const { data: session, status } = useSession();
+   const user = session?.user;
    const {
       recentActivity,
       recommendations,
@@ -79,6 +80,20 @@ export function UserDashboard({ className }: UserDashboardProps) {
          loadRecommendations(userId);
       }
    }, [userId, loadUserDashboard, loadRecommendations]);
+
+   // Show loading while checking session
+   if (status === "loading") {
+      return (
+         <div className='container mx-auto px-4 py-8'>
+            <Card>
+               <CardContent className='flex flex-col items-center justify-center py-12'>
+                  <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary'></div>
+                  <p className='mt-4 text-muted-foreground'>Loading...</p>
+               </CardContent>
+            </Card>
+         </div>
+      );
+   }
 
    if (!user || !userId) {
       return (

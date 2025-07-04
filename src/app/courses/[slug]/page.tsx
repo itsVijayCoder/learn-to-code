@@ -7,7 +7,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCourseBySlug } from "@/lib/content";
 import { CourseOverview } from "@/components/course/course-overview";
-import { AuthGuard } from "@/components/auth";
+import { MainLayout } from "@/components/layout/main-layout";
 
 interface CoursePageProps {
    readonly params: Promise<{
@@ -50,10 +50,10 @@ export default async function CoursePage({ params }: CoursePageProps) {
    }
 
    return (
-      <AuthGuard>
+      <MainLayout>
          <div className='min-h-screen bg-background'>
             <CourseOverview course={course} />
          </div>
-      </AuthGuard>
+      </MainLayout>
    );
 }

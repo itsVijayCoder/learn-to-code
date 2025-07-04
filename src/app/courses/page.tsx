@@ -6,7 +6,7 @@
 import { Metadata } from "next";
 import { getAllCourses } from "@/lib/content";
 import { CoursesGrid } from "@/components/course/courses-grid";
-import { AuthGuard } from "@/components/auth";
+import { MainLayout } from "@/components/layout/main-layout";
 
 export const metadata: Metadata = {
    title: "Courses - Learn To Code",
@@ -20,7 +20,7 @@ export default async function CoursesPage() {
    const courses = await getAllCourses();
 
    return (
-      <AuthGuard>
+      <MainLayout>
          <div className='min-h-screen bg-background'>
             <div className='container mx-auto px-4 py-8'>
                <div className='mb-8'>
@@ -34,6 +34,6 @@ export default async function CoursesPage() {
                <CoursesGrid courses={courses} />
             </div>
          </div>
-      </AuthGuard>
+      </MainLayout>
    );
 }

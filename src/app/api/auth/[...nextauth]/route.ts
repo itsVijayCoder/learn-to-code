@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { compare } from "bcryptjs";
 import { env } from "@/config/env";
 import type { AuthOptions } from "next-auth";
 
@@ -56,31 +55,47 @@ const authOptions: AuthOptions = {
             }
 
             try {
-               // TODO: Replace with actual database query
-               // For now, this is a mock implementation
-               const mockUser = {
-                  id: "1",
-                  email: credentials.email,
-                  name: "Test User",
-                  role: "student" as const,
-                  hashedPassword: "$2a$12$dummy.hash", // In real app, fetch from database
-               };
+               // DEMO USERS FOR TESTING - Remove in production
+               const demoUsers = [
+                  {
+                     id: "1",
+                     email: "student@demo.com",
+                     password: "student123",
+                     name: "Demo Student",
+                     role: "student" as const,
+                  },
+                  {
+                     id: "2",
+                     email: "instructor@demo.com",
+                     password: "instructor123",
+                     name: "Demo Instructor",
+                     role: "instructor" as const,
+                  },
+                  {
+                     id: "3",
+                     email: "admin@demo.com",
+                     password: "admin123",
+                     name: "Demo Admin",
+                     role: "admin" as const,
+                  },
+               ];
 
-               // Verify password
-               const isValid = await compare(
-                  credentials.password,
-                  mockUser.hashedPassword
+               // Find matching demo user
+               const user = demoUsers.find(
+                  (u) =>
+                     u.email === credentials.email &&
+                     u.password === credentials.password
                );
 
-               if (!isValid) {
+               if (!user) {
                   return null;
                }
 
                return {
-                  id: mockUser.id,
-                  email: mockUser.email,
-                  name: mockUser.name,
-                  role: mockUser.role,
+                  id: user.id,
+                  email: user.email,
+                  name: user.name,
+                  role: user.role,
                };
             } catch {
                console.error("Auth error");

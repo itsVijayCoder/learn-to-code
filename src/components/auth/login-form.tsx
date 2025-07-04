@@ -65,9 +65,20 @@ const LoginForm = ({
          if (result?.error) {
             setError("Invalid email or password. Please try again.");
          } else {
-            // Refresh the session and redirect
-            await getSession();
-            router.push(callbackUrl);
+            // Refresh the session and get user role
+            const session = await getSession();
+
+            // Redirect based on user role
+            let redirectUrl = callbackUrl;
+            if (session?.user?.role === "admin") {
+               redirectUrl = "/admin";
+            } else if (session?.user?.role === "instructor") {
+               redirectUrl = "/dashboard"; // For now, until instructor dashboard is built
+            } else {
+               redirectUrl = "/dashboard";
+            }
+
+            router.push(redirectUrl);
             router.refresh();
          }
       } catch {
@@ -106,6 +117,30 @@ const LoginForm = ({
                   <AlertDescription>{error}</AlertDescription>
                </Alert>
             )}
+
+            {/* Demo Credentials */}
+            <Alert>
+               <AlertDescription>
+                  <div className='space-y-2'>
+                     <p className='font-medium text-sm'>
+                        Demo Credentials (for testing):
+                     </p>
+                     <div className='text-xs space-y-1'>
+                        <div>
+                           <strong>Student:</strong> student@demo.com /
+                           student123
+                        </div>
+                        <div>
+                           <strong>Instructor:</strong> instructor@demo.com /
+                           instructor123
+                        </div>
+                        <div>
+                           <strong>Admin:</strong> admin@demo.com / admin123
+                        </div>
+                     </div>
+                  </div>
+               </AlertDescription>
+            </Alert>
 
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
                <div className='space-y-2'>
@@ -214,6 +249,88 @@ const LoginForm = ({
                   <Chrome className='h-4 w-4 mr-2' />
                   Google
                </Button>
+            </div>
+
+            {/* Quick Demo Login Buttons */}
+            <div className='space-y-2'>
+               <p className='text-center text-xs text-muted-foreground'>
+                  Quick Demo Login:
+               </p>
+               <div className='grid grid-cols-3 gap-2'>
+                  <Button
+                     variant='secondary'
+                     size='sm'
+                     onClick={() => {
+                        // Auto-fill and submit demo student credentials
+                        const form = document.querySelector(
+                           "form"
+                        ) as HTMLFormElement;
+                        const emailInput = form?.querySelector(
+                           'input[type="email"]'
+                        ) as HTMLInputElement;
+                        const passwordInput = form?.querySelector(
+                           'input[type="password"]'
+                        ) as HTMLInputElement;
+                        if (emailInput && passwordInput) {
+                           emailInput.value = "student@demo.com";
+                           passwordInput.value = "student123";
+                           form.requestSubmit();
+                        }
+                     }}
+                     disabled={isLoading}
+                     className='w-full text-xs'
+                  >
+                     Student
+                  </Button>
+                  <Button
+                     variant='secondary'
+                     size='sm'
+                     onClick={() => {
+                        const form = document.querySelector(
+                           "form"
+                        ) as HTMLFormElement;
+                        const emailInput = form?.querySelector(
+                           'input[type="email"]'
+                        ) as HTMLInputElement;
+                        const passwordInput = form?.querySelector(
+                           'input[type="password"]'
+                        ) as HTMLInputElement;
+                        if (emailInput && passwordInput) {
+                           emailInput.value = "instructor@demo.com";
+                           passwordInput.value = "instructor123";
+                           form.requestSubmit();
+                        }
+                     }}
+                     disabled={isLoading}
+                     className='w-full text-xs'
+                  >
+                     Instructor
+                  </Button>
+                  <Button
+                     variant='secondary'
+                     size='sm'
+                     onClick={() => {
+                        const form = document.querySelector(
+                           "form"
+                        ) as HTMLFormElement;
+                        const emailInput = form?.querySelector(
+                           'input[type="email"]'
+                        ) as HTMLInputElement;
+                        const passwordInput = form?.querySelector(
+                           'input[type="password"]'
+                        ) as HTMLInputElement;
+                        if (emailInput && passwordInput) {
+                           emailInput.value = "admin@demo.com";
+                           passwordInput.value = "admin123";
+                           form.requestSubmit();
+                        }
+                     }}
+                     disabled={isLoading}
+                     className='w-full text-xs'
+                  >
+                     Admin
+                  </Button>
+               </div>
             </div>
 
             <p className='text-center text-sm text-muted-foreground'>

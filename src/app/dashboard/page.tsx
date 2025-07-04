@@ -4,6 +4,7 @@
 
 import { Metadata } from "next";
 import { UserDashboard } from "@/components/dashboard/user-dashboard";
+import { MainLayout } from "@/components/layout/main-layout";
 
 export const metadata: Metadata = {
    title: "Dashboard - Learn To Code",
@@ -11,5 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
-   return <UserDashboard />;
+   return (
+      <MainLayout>
+         <UserDashboard />
+      </MainLayout>
+   );
 }

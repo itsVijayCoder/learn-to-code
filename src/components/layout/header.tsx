@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import {
    Menu,
    X,
@@ -21,12 +22,13 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/stores/useAuthStore";
 
 const Header = () => {
    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
    const pathname = usePathname();
-   const { user, isAuthenticated, logout } = useAuthStore();
+   const { data: session } = useSession();
+   const user = session?.user;
+   const isAuthenticated = !!user;
 
    const navigation = [
       { name: "Courses", href: "/courses" },
@@ -37,12 +39,12 @@ const Header = () => {
    ];
 
    const handleLogout = () => {
-      logout();
+      signOut({ callbackUrl: "/auth/login" });
    };
 
    return (
       <header className='sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
-         <div className='container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0'>
+         <div className='container mx-auto flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0'>
             <div className='flex gap-6 md:gap-10'>
                <Link href='/' className='flex items-center space-x-2'>
                   <BookOpen className='h-6 w-6' />
@@ -89,9 +91,25 @@ const Header = () => {
                               <p className='w-[200px] truncate text-sm text-muted-foreground'>
                                  {user?.email}
                               </p>
+                              {user?.role === "admin" && (
+                                 <p className='text-xs text-blue-600 font-medium'>
+                                    Admin Access
+                                 </p>
+                              )}
                            </div>
                         </div>
                         <DropdownMenuSeparator />
+                        {user?.role === "admin" && (
+                           <>
+                              <DropdownMenuItem asChild>
+                                 <Link href='/admin'>
+                                    <Settings className='mr-2 h-4 w-4' />
+                                    Admin Panel
+                                 </Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                           </>
+                        )}
                         <DropdownMenuItem asChild>
                            <Link href='/dashboard'>
                               <BarChart3 className='mr-2 h-4 w-4' />

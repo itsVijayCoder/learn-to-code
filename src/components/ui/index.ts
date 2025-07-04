@@ -1,5 +1,6 @@
 // UI components
 export * from "./button";
+export * from "./icon-button";
 export * from "./card";
 export * from "./input";
 export * from "./badge";

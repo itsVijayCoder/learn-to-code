@@ -3,9 +3,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Button variants using CVA for consistent styling
+ * IconButton variants using CVA for consistent styling
  */
-const buttonVariants = cva(
+const iconButtonVariants = cva(
    "inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-95",
    {
       variants: {
@@ -42,11 +42,11 @@ const buttonVariants = cva(
 );
 
 /**
- * Button component interface
+ * IconButton component interface
  */
-export interface ButtonProps
+export interface IconButtonProps
    extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-      VariantProps<typeof buttonVariants> {
+      VariantProps<typeof iconButtonVariants> {
    asChild?: boolean;
    isLoading?: boolean;
    leftIcon?: React.ReactNode;
@@ -55,9 +55,10 @@ export interface ButtonProps
 }
 
 /**
- * Button component with multiple variants and accessibility features
+ * IconButton component specifically designed for buttons with icons
+ * Provides perfect alignment and spacing for icons and text
  */
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
    (
       {
          className,
@@ -119,7 +120,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
       return (
          <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
+            className={cn(iconButtonVariants({ variant, size, className }))}
             ref={ref}
             disabled={disabled || isLoading}
             aria-busy={isLoading}
@@ -160,6 +161,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       );
    }
 );
-Button.displayName = "Button";
 
-export { Button, buttonVariants };
+IconButton.displayName = "IconButton";
+
+export { IconButton, iconButtonVariants };
