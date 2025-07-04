@@ -18,6 +18,12 @@ const envSchema = z.object({
       .string()
       .min(32, "NextAuth secret must be at least 32 characters"),
 
+   // OAuth providers (optional)
+   GITHUB_CLIENT_ID: z.string().optional(),
+   GITHUB_CLIENT_SECRET: z.string().optional(),
+   GOOGLE_CLIENT_ID: z.string().optional(),
+   GOOGLE_CLIENT_SECRET: z.string().optional(),
+
    // Supabase configuration
    SUPABASE_URL: z.string().url("Invalid Supabase URL"),
    SUPABASE_ANON_KEY: z.string().min(1, "Supabase anon key is required"),

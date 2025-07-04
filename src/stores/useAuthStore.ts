@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { signOut, getSession } from "next-auth/react";
 import type { User, AuthState } from "@/types";
 
 /**
@@ -12,7 +13,8 @@ interface AuthStore extends AuthState {
    setLoading: (isLoading: boolean) => void;
    setError: (error: Error | null) => void;
    login: (user: User) => void;
-   logout: () => void;
+   logout: () => Promise<void>;
+   refreshSession: () => Promise<void>;
    clearError: () => void;
 }
 
@@ -55,13 +57,89 @@ export const useAuthStore = create<AuthStore>()(
                   state.error = null;
                }),
 
-            logout: () =>
-               set((state) => {
-                  state.user = null;
-                  state.isAuthenticated = false;
-                  state.isLoading = false;
-                  state.error = null;
-               }),
+            logout: async () => {
+               try {
+                  set((state) => {
+                     state.isLoading = true;
+                  });
+
+                  await signOut({ callbackUrl: "/" });
+
+                  set((state) => {
+                     state.user = null;
+                     state.isAuthenticated = false;
+                     state.isLoading = false;
+                     state.error = null;
+                  });
+               } catch (error) {
+                  set((state) => {
+                     state.error =
+                        error instanceof Error
+                           ? error
+                           : new Error("Logout failed");
+                     state.isLoading = false;
+                  });
+               }
+            },
+
+            refreshSession: async () => {
+               try {
+                  set((state) => {
+                     state.isLoading = true;
+                  });
+
+                  const session = await getSession();
+
+                  if (session?.user) {
+                     const user: User = {
+                        id: session.user.id as User["id"],
+                        email: session.user.email,
+                        name: session.user.name,
+                        role: session.user.role,
+                        avatar: session.user.image || null,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        preferences: {
+                           theme: "system",
+                           notifications: {
+                              email: true,
+                              push: false,
+                              marketing: false,
+                           },
+                           language: "en",
+                        },
+                        profile: {
+                           bio: null,
+                           location: null,
+                           website: null,
+                           twitter: null,
+                           github: null,
+                           linkedin: null,
+                        },
+                     };
+
+                     set((state) => {
+                        state.user = user;
+                        state.isAuthenticated = true;
+                        state.isLoading = false;
+                     });
+                  } else {
+                     set((state) => {
+                        state.user = null;
+                        state.isAuthenticated = false;
+                        state.isLoading = false;
+                     });
+                  }
+               } catch (error) {
+                  set((state) => {
+                     state.error =
+                        error instanceof Error
+                           ? error
+                           : new Error("Session refresh failed");
+                     state.isLoading = false;
+                  });
+               }
+            },
 
             clearError: () =>
                set((state) => {

@@ -8,10 +8,35 @@ export type UserId = Brand<string, "UserId">;
 /**
  * User role enumeration
  */
-export type Role = "admin" | "user" | "guest";
+export type Role = "admin" | "instructor" | "student";
+
+/**
+ * User preferences interface
+ */
+export interface UserPreferences {
+   readonly theme: "light" | "dark" | "system";
+   readonly notifications: {
+      readonly email: boolean;
+      readonly push: boolean;
+      readonly marketing: boolean;
+   };
+   readonly language: string;
+}
 
 /**
  * User profile interface
+ */
+export interface UserProfile {
+   readonly bio: string | null;
+   readonly location: string | null;
+   readonly website: string | null;
+   readonly twitter: string | null;
+   readonly github: string | null;
+   readonly linkedin: string | null;
+}
+
+/**
+ * User interface
  */
 export interface User {
    readonly id: UserId;
@@ -21,6 +46,8 @@ export interface User {
    readonly avatar?: string | null;
    readonly createdAt: Date;
    readonly updatedAt: Date;
+   readonly preferences: UserPreferences;
+   readonly profile: UserProfile;
 }
 
 /**
