@@ -11,3 +11,4 @@ export * from "./dropdown-menu";
 export * from "./tabs";
 export * from "./alert-dialog";
 export * from "./alert";
+export * from "./scroll-area";

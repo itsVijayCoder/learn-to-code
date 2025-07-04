@@ -40,6 +40,8 @@ interface ProgressStore {
    syncProgress: () => Promise<void>;
    getCourseProgress: (courseId: CourseId) => CourseProgress | undefined;
    getLessonProgress: (lessonId: LessonId) => LessonProgress | undefined;
+   getModuleProgress: (courseId: CourseId, moduleId: ModuleId) => number;
+   isLessonCompleted: (courseId: CourseId, lessonId: LessonId) => boolean;
    getOverallProgress: (userId: UserId) => {
       totalCourses: number;
       completedCourses: number;
@@ -64,7 +66,10 @@ export const useProgressStore = create<ProgressStore>()(
             // Actions
             setCourseProgress: (courseId, progress) =>
                set((state) => {
-                  state.courseProgress[courseId] = progress;
+                  state.courseProgress[courseId] = {
+                     ...progress,
+                     modules: [...progress.modules],
+                  };
                }),
 
             setLessonProgress: (lessonId, progress) =>
@@ -185,6 +190,36 @@ export const useProgressStore = create<ProgressStore>()(
             getLessonProgress: (lessonId) => {
                const state = get();
                return state.lessonProgress[lessonId];
+            },
+
+            getModuleProgress: (courseId, moduleId) => {
+               const state = get();
+               const moduleProgressEntries = Object.values(
+                  state.lessonProgress
+               ).filter(
+                  (progress) =>
+                     progress.courseId === courseId &&
+                     progress.moduleId === moduleId
+               );
+
+               if (moduleProgressEntries.length === 0) return 0;
+
+               const completedCount = moduleProgressEntries.filter(
+                  (progress) => progress.status === "completed"
+               ).length;
+
+               return Math.round(
+                  (completedCount / moduleProgressEntries.length) * 100
+               );
+            },
+
+            isLessonCompleted: (courseId, lessonId) => {
+               const state = get();
+               const lessonProgress = state.lessonProgress[lessonId];
+               return (
+                  lessonProgress?.status === "completed" &&
+                  lessonProgress?.courseId === courseId
+               );
             },
 
             getOverallProgress: (userId) => {
