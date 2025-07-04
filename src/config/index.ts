@@ -1,3 +1,3 @@
 // Configuration exports
-export * from './env'
-export * from './theme'
+export * from "./env";
+export * from "./theme";
