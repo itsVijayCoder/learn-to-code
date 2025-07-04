@@ -1,0 +1,165 @@
+---
+title: "Introduction to JavaScript"
+description: "Learn the basics of JavaScript programming language"
+slug: "introduction-to-javascript"
+order: 1
+duration: 30
+type: "javascript"
+tags: ["basics", "fundamentals", "programming"]
+author: "Learn To Code Team"
+lastModified: "2024-01-15"
+prerequisites: []
+learningObjectives:
+   - "Understand what JavaScript is and its role in web development"
+   - "Learn basic JavaScript syntax and data types"
+   - "Write your first JavaScript program"
+---
+
+# Introduction to JavaScript
+
+Welcome to your first lesson in JavaScript! In this lesson, you'll learn the
+fundamentals of JavaScript and write your first program.
+
+## What is JavaScript?
+
+JavaScript is a high-level, interpreted programming language that is one of the
+core technologies of the World Wide Web. It enables interactive web pages and is
+an essential part of web applications.
+
+<Callout type='info' title='Did you know?'>
+   JavaScript was created in just 10 days by Brendan Eich at Netscape in 1995!
+</Callout>
+
+## Your First JavaScript Program
+
+Let's start with the classic "Hello, World!" program:
+
+```javascript
+// This is a comment
+console.log("Hello, World!");
+```
+
+## Variables and Data Types
+
+JavaScript has several basic data types:
+
+### Numbers
+
+```javascript
+let age = 25;
+let price = 19.99;
+```
+
+### Strings
+
+```javascript
+let name = "Alice";
+let message = "Hello, JavaScript!";
+```
+
+### Booleans
+
+```javascript
+let isActive = true;
+let isComplete = false;
+```
+
+### Arrays
+
+```javascript
+let colors = ["red", "green", "blue"];
+let numbers = [1, 2, 3, 4, 5];
+```
+
+<Callout type='warning' title='Variable Naming'>
+   Variable names in JavaScript are case-sensitive and cannot start with a
+   number.
+</Callout>
+
+## Basic Operations
+
+You can perform various operations with these data types:
+
+```javascript
+// Arithmetic operations
+let sum = 10 + 5;
+let difference = 10 - 5;
+let product = 10 * 5;
+let quotient = 10 / 5;
+
+// String concatenation
+let greeting = "Hello" + " " + "World";
+let fullName = firstName + " " + lastName;
+
+// Array operations
+colors.push("yellow"); // Add to end
+let firstColor = colors[0]; // Access first element
+```
+
+## Functions
+
+Functions are reusable blocks of code:
+
+```javascript
+function greet(name) {
+   return "Hello, " + name + "!";
+}
+
+// Call the function
+let message = greet("Alice");
+console.log(message); // Output: Hello, Alice!
+```
+
+## Practice Exercise
+
+Try creating a simple calculator function:
+
+<CodeTabs defaultValue="exercise">
+  <TabsList>
+    <TabsTrigger value="exercise">Exercise</TabsTrigger>
+    <TabsTrigger value="solution">Solution</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="exercise">
+    ```javascript
+    // Create a function that adds two numbers
+    function add(a, b) {
+        // Your code here
+    }
+
+    // Test your function
+    console.log(add(5, 3)); // Should output: 8
+    ```
+
+  </TabsContent>
+  
+  <TabsContent value="solution">
+    ```javascript
+    function add(a, b) {
+        return a + b;
+    }
+
+    console.log(add(5, 3)); // Output: 8
+    ```
+
+  </TabsContent>
+</CodeTabs>
+
+## What's Next?
+
+In the next lesson, we'll explore:
+
+- Control structures (if/else, loops)
+- Objects and methods
+- Event handling
+
+<Callout type='success' title='Congratulations!'>
+   You've completed your first JavaScript lesson! Keep practicing and you'll
+   become proficient in no time.
+</Callout>
+
+## Additional Resources
+
+- [MDN JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+- [JavaScript.info](https://javascript.info/)
+- [Eloquent JavaScript (free book)](https://eloquentjavascript.net/)

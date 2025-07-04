@@ -25,6 +25,7 @@ const CourseCard = ({
       >
          <CardHeader className='p-0'>
             <div className='relative overflow-hidden rounded-t-lg'>
+               {/* eslint-disable-next-line @next/next/no-img-element */}
                <img
                   src={course.thumbnail || "/api/placeholder/400/200"}
                   alt={course.title}
@@ -59,7 +60,10 @@ const CourseCard = ({
 
                <CourseMeta
                   duration={`${Math.floor(course.duration / 60)}h ${course.duration % 60}m`}
-                  difficulty={course.difficulty}
+                  lessonsCount={course.modules.reduce(
+                     (sum, module) => sum + module.lessons.length,
+                     0
+                  )}
                />
 
                {showProgress && progress > 0 && (
