@@ -1,0 +1,314 @@
+---
+title: "Variables and Data Types"
+description:
+   "Deep dive into JavaScript variables, data types, and type conversion"
+slug: "variables-and-data-types"
+order: 2
+duration: 45
+type: "javascript"
+tags: ["variables", "data-types", "fundamentals"]
+author: "Learn To Code Team"
+lastModified: "2024-01-15"
+prerequisites: ["introduction-to-javascript"]
+learningObjectives:
+   - "Master JavaScript variable declarations"
+   - "Understand all primitive data types"
+   - "Learn type conversion and coercion"
+   - "Practice working with different data types"
+---
+
+# Variables and Data Types
+
+In this lesson, we'll explore JavaScript variables and data types in detail.
+Understanding these concepts is crucial for writing effective JavaScript code.
+
+## Variable Declarations
+
+JavaScript has three ways to declare variables:
+
+### `var` (Legacy)
+
+```javascript
+var message = "Hello";
+var count; // undefined
+```
+
+<Callout type='warning' title='Avoid var'>
+   `var` has function scope and hoisting behavior that can lead to bugs. Use
+   `let` and `const` instead.
+</Callout>
+
+### `let` (Block-scoped)
+
+```javascript
+let name = "Alice";
+let age = 25;
+
+// Can be reassigned
+age = 26;
+```
+
+### `const` (Constant)
+
+```javascript
+const PI = 3.14159;
+const colors = ["red", "green", "blue"];
+
+// PI = 3.14; // Error! Cannot reassign
+colors.push("yellow"); // OK! Can modify array contents
+```
+
+## Primitive Data Types
+
+JavaScript has seven primitive data types:
+
+### 1. Number
+
+```javascript
+let integer = 42;
+let decimal = 3.14;
+let negative = -17;
+let scientific = 2.998e8; // 299,800,000
+
+// Special numeric values
+let infinity = Infinity;
+let notANumber = NaN;
+```
+
+### 2. String
+
+```javascript
+let singleQuotes = "Hello";
+let doubleQuotes = "World";
+let backticks = `Hello, ${name}!`; // Template literals
+
+// String methods
+let text = "JavaScript";
+console.log(text.length); // 10
+console.log(text.toUpperCase()); // JAVASCRIPT
+console.log(text.charAt(0)); // J
+```
+
+### 3. Boolean
+
+```javascript
+let isTrue = true;
+let isFalse = false;
+
+// Boolean conversion
+let truthyValue = Boolean("hello"); // true
+let falsyValue = Boolean(""); // false
+```
+
+### 4. Undefined
+
+```javascript
+let uninitialized;
+console.log(uninitialized); // undefined
+
+function noReturn() {
+   // No return statement
+}
+console.log(noReturn()); // undefined
+```
+
+### 5. Null
+
+```javascript
+let emptyValue = null;
+console.log(typeof null); // "object" (this is a known bug!)
+```
+
+### 6. Symbol (ES6)
+
+```javascript
+let symbol1 = Symbol();
+let symbol2 = Symbol("description");
+let symbol3 = Symbol("description");
+
+console.log(symbol2 === symbol3); // false (symbols are unique)
+```
+
+### 7. BigInt (ES2020)
+
+```javascript
+let bigNumber = 1234567890123456789012345678901234567890n;
+let anotherBig = BigInt("1234567890123456789012345678901234567890");
+```
+
+## Type Checking
+
+Use the `typeof` operator to check variable types:
+
+```javascript
+console.log(typeof 42); // "number"
+console.log(typeof "hello"); // "string"
+console.log(typeof true); // "boolean"
+console.log(typeof undefined); // "undefined"
+console.log(typeof null); // "object" (bug!)
+console.log(typeof Symbol()); // "symbol"
+console.log(typeof 123n); // "bigint"
+```
+
+## Type Conversion
+
+JavaScript performs automatic type conversion (coercion) in certain situations:
+
+### Implicit Conversion
+
+```javascript
+let result1 = "5" + 3; // "53" (number to string)
+let result2 = "5" - 3; // 2 (string to number)
+let result3 = "5" * "2"; // 10 (both to numbers)
+```
+
+### Explicit Conversion
+
+```javascript
+// To string
+let numStr = String(123); // "123"
+let boolStr = true.toString(); // "true"
+
+// To number
+let strNum = Number("123"); // 123
+let parseNum = parseInt("123px"); // 123
+let floatNum = parseFloat("3.14"); // 3.14
+
+// To boolean
+let boolValue = Boolean(1); // true
+let emptyBool = Boolean(""); // false
+```
+
+## Truthy and Falsy Values
+
+In JavaScript, values are either "truthy" or "falsy":
+
+### Falsy Values
+
+```javascript
+false;
+0 - 0;
+0n;
+("");
+null;
+undefined;
+NaN;
+```
+
+### Truthy Values
+
+```javascript
+// Everything else is truthy!
+true
+1
+"hello"
+[]
+{}
+function() {}
+```
+
+<Callout type='info' title='Tip'>
+   Use `!!value` to convert any value to its boolean equivalent.
+</Callout>
+
+## Working with Objects and Arrays
+
+While not primitive types, objects and arrays are fundamental:
+
+### Objects
+
+```javascript
+let person = {
+   name: "Alice",
+   age: 30,
+   isStudent: false,
+};
+
+console.log(person.name); // "Alice"
+console.log(person["age"]); // 30
+
+// Adding properties
+person.email = "alice@example.com";
+```
+
+### Arrays
+
+```javascript
+let fruits = ["apple", "banana", "orange"];
+
+console.log(fruits[0]); // "apple"
+console.log(fruits.length); // 3
+
+// Array methods
+fruits.push("grape"); // Add to end
+let firstFruit = fruits.shift(); // Remove from beginning
+```
+
+## Practice Exercises
+
+### Exercise 1: Variable Practice
+
+```javascript
+// Declare variables for a user profile
+const username = "coder123";
+let loginCount = 0;
+let isOnline = true;
+let lastLogin = null;
+
+// Update the profile
+loginCount = loginCount + 1;
+isOnline = true;
+lastLogin = new Date();
+```
+
+### Exercise 2: Type Conversion Challenge
+
+<CodeTabs defaultValue='challenge'>
+   <TabsList>
+      <TabsTrigger value='challenge'>Challenge</TabsTrigger>
+      <TabsTrigger value='solution'>Solution</TabsTrigger>
+   </TabsList>
+
+<TabsContent value='challenge'>
+   ```javascript // What will these expressions evaluate to? console.log("5" + 3
+   + 2); console.log(3 + 2 + "5"); console.log("5" - 3); console.log("5" * "2");
+   console.log(true + 1); console.log(false + 1); console.log("" == 0);
+   console.log("" === 0); ```
+</TabsContent>
+
+   <TabsContent value='solution'>
+   ```javascript
+   console.log("5" + 3 + 2); // "532"
+   console.log(3 + 2 + "5"); // "55"
+   console.log("5" - 3); // 2
+   console.log("5" * "2"); // 10
+   console.log(true + 1); // 2
+   console.log(false + 1); // 1
+   console.log("" == 0); // true
+   console.log("" === 0); // false
+   ```
+   </TabsContent>
+</CodeTabs>
+
+## Common Pitfalls
+
+<Callout type='warning' title='Watch Out For'>
+   1. **Automatic type conversion** can lead to unexpected results 2. **`typeof
+   null` returns "object"** - use `value === null` to check for null 3. **NaN is
+   not equal to itself** - use `Number.isNaN()` to check for NaN 4. **Floating
+   point precision** - 0.1 + 0.2 !== 0.3 in JavaScript
+</Callout>
+
+## Summary
+
+- Use `let` and `const` instead of `var`
+- JavaScript has 7 primitive types: number, string, boolean, undefined, null,
+  symbol, bigint
+- Type conversion can be implicit (automatic) or explicit (manual)
+- Understanding truthy/falsy values is crucial for conditional logic
+- Always be aware of type coercion in operations and comparisons
+
+## Next Steps
+
+In our next lesson, we'll explore control structures and learn how to make
+decisions in our code using if statements, loops, and more!
