@@ -38,6 +38,18 @@ const Header = () => {
       { name: "Community", href: "/community" },
    ];
 
+   // Add admin navigation for admin users
+   const adminNavigation =
+      user?.role === "admin"
+         ? [
+              {
+                 name: "Course Management",
+                 href: "/admin/courses",
+                 isAdmin: true,
+              },
+           ]
+         : [];
+
    const handleLogout = () => {
       signOut({ callbackUrl: "/auth/login" });
    };
@@ -64,6 +76,20 @@ const Header = () => {
                         {item.name}
                      </Link>
                   ))}
+                  {adminNavigation.map((item) => (
+                     <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                           "flex items-center text-sm font-medium transition-colors hover:text-foreground",
+                           "text-blue-600 hover:text-blue-700 border border-blue-200 px-3 py-1 rounded-md bg-blue-50",
+                           pathname === item.href && "text-blue-700 bg-blue-100"
+                        )}
+                     >
+                        <BookOpen className='h-3 w-3 mr-1' />
+                        {item.name}
+                     </Link>
+                  ))}
                </nav>
             </div>
 
@@ -73,11 +99,11 @@ const Header = () => {
                      <DropdownMenuTrigger asChild>
                         <Button
                            variant='ghost'
-                           className='relative h-8 w-8 rounded-full'
+                           className='relative border-2 size-10 border-muted rounded-full'
                         >
-                           <div className='h-8 w-8 rounded-full bg-muted flex items-center justify-center'>
-                              <User className='h-4 w-4' />
-                           </div>
+                           {/* <div className='h-8 w-8 rounded-full bg-muted flex items-center justify-center'> */}
+                           <User className=' size-4' />
+                           {/* </div> */}
                         </Button>
                      </DropdownMenuTrigger>
                      <DropdownMenuContent
@@ -105,6 +131,12 @@ const Header = () => {
                                  <Link href='/admin'>
                                     <Settings className='mr-2 h-4 w-4' />
                                     Admin Panel
+                                 </Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem asChild>
+                                 <Link href='/admin/courses'>
+                                    <BookOpen className='mr-2 h-4 w-4' />
+                                    Course Management
                                  </Link>
                               </DropdownMenuItem>
                               <DropdownMenuSeparator />
@@ -176,6 +208,23 @@ const Header = () => {
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
                      >
+                        {item.name}
+                     </Link>
+                  ))}
+                  {adminNavigation.map((item) => (
+                     <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                           "flex items-center px-3 py-2 text-base font-medium transition-colors",
+                           "text-blue-600 hover:text-blue-700 border border-blue-200 rounded-md bg-blue-50 mx-2 mt-2",
+                           pathname === item.href
+                              ? "text-blue-700 bg-blue-100"
+                              : ""
+                        )}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                     >
+                        <BookOpen className='h-4 w-4 mr-2' />
                         {item.name}
                      </Link>
                   ))}

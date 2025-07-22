@@ -14,6 +14,7 @@ import {
    Code,
    Zap,
    Shield,
+   Settings,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -128,25 +129,29 @@ export default function HomePage() {
                      </div>
 
                      <div className='flex flex-col sm:flex-row gap-4'>
-                        <Button
-                           size='lg'
-                           className='text-lg px-8'
-                           rightIcon={<ArrowRight />}
-                           asChild
-                        >
-                           <Link href='/auth/register'>
+                        <Link href='/auth/register'>
+                           <Button
+                              size='lg'
+                              className='text-lg px-8'
+                              // rightIcon={<ArrowRight />}
+                              // asChild
+                           >
+                              <ArrowRight />
                               Start Learning Free
-                           </Link>
-                        </Button>
-                        <Button
-                           size='lg'
-                           variant='outline'
-                           className='text-lg px-8'
-                           leftIcon={<PlayCircle />}
-                           asChild
-                        >
-                           <Link href='/courses'>Explore Courses</Link>
-                        </Button>
+                           </Button>
+                        </Link>
+                        <Link href='/courses'>
+                           <Button
+                              size='lg'
+                              variant='outline'
+                              className='text-lg px-8'
+                              // leftIcon={<PlayCircle />}
+                              // asChild
+                           >
+                              <PlayCircle />
+                              Explore Courses
+                           </Button>
+                        </Link>
                      </div>
 
                      <div className='flex items-center space-x-8 text-sm text-muted-foreground'>
@@ -206,6 +211,62 @@ export default function HomePage() {
                         </div>
                      </div>
                   ))}
+               </div>
+            </div>
+         </section>
+
+         {/* Admin Demo Banner */}
+         <section className='py-12 bg-gradient-to-r from-blue-600 to-indigo-700'>
+            <div className='container mx-auto px-4'>
+               <div className='text-center space-y-6'>
+                  <div className='flex justify-center items-center gap-3'>
+                     <Shield className='h-8 w-8 text-blue-200' />
+                     <h2 className='text-2xl lg:text-3xl font-bold text-white'>
+                        🎯 Live Demo: Functional Programming Admin System
+                     </h2>
+                  </div>
+                  <p className='text-blue-100 text-lg max-w-3xl mx-auto'>
+                     Experience our advanced course management system built with
+                     pure functional programming principles. Zero classes, SOLID
+                     architecture, and real-time analytics.
+                  </p>
+                  <div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
+                     <Button
+                        size='lg'
+                        className='bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8'
+                        asChild
+                     >
+                        <Link href='/admin/courses'>
+                           <BookOpen className='h-5 w-5 mr-2' />
+                           View Course Management Demo
+                        </Link>
+                     </Button>
+                     <Button
+                        size='lg'
+                        variant='outline'
+                        className='border-blue-200 text-white hover:bg-blue-600 px-8'
+                        asChild
+                     >
+                        <Link href='/admin'>
+                           <Settings className='h-5 w-5 mr-2' />
+                           Admin Dashboard
+                        </Link>
+                     </Button>
+                  </div>
+                  <div className='grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-blue-200 max-w-2xl mx-auto'>
+                     <div className='flex items-center justify-center gap-2'>
+                        <CheckCircle className='h-4 w-4 text-green-300' />
+                        No Classes - Pure Functions
+                     </div>
+                     <div className='flex items-center justify-center gap-2'>
+                        <CheckCircle className='h-4 w-4 text-green-300' />
+                        SOLID & DRY Principles
+                     </div>
+                     <div className='flex items-center justify-center gap-2'>
+                        <CheckCircle className='h-4 w-4 text-green-300' />
+                        Interactive Demos
+                     </div>
+                  </div>
                </div>
             </div>
          </section>
@@ -319,23 +380,28 @@ export default function HomePage() {
                      courses and expert guidance.
                   </p>
                   <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                     <Button
-                        size='lg'
-                        variant='secondary'
-                        className='text-lg px-8'
-                        rightIcon={<ArrowRight />}
-                        asChild
-                     >
-                        <Link href='/auth/register'>Get Started Free</Link>
-                     </Button>
-                     <Button
-                        size='lg'
-                        variant='outline'
-                        className='text-lg px-8 border-white text-white hover:bg-white hover:text-blue-600'
-                        asChild
-                     >
-                        <Link href='/auth/login'>Sign In</Link>
-                     </Button>
+                     <Link href='/auth/register'>
+                        <Button
+                           size='lg'
+                           variant='secondary'
+                           className='text-lg px-8'
+                           // rightIcon={<ArrowRight />}
+                           // asChild
+                        >
+                           <ArrowRight />
+                           Get Started Free
+                        </Button>
+                     </Link>
+                     <Link href='/auth/login'>
+                        <Button
+                           size='lg'
+                           // variant=''
+                           className='text-lg px-8 '
+                           // asChild
+                        >
+                           Sign In
+                        </Button>
+                     </Link>
                   </div>
                   <p className='text-sm opacity-75'>
                      Free 7-day trial • No credit card required • Cancel anytime

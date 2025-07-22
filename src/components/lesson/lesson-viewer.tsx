@@ -110,7 +110,7 @@ export function LessonViewer({
          variants={containerVariants}
          initial='hidden'
          animate='visible'
-         className='container mx-auto px-4 py-8 max-w-4xl'
+         className='container mx-auto px-4 py-8'
       >
          {/* Breadcrumb Navigation */}
          <motion.div variants={itemVariants} className='mb-6'>

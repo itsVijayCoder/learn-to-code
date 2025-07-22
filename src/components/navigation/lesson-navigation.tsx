@@ -51,7 +51,7 @@ const NavigationButton = ({
             <Button
                variant='outline'
                className={cn(
-                  "h-auto p-4 flex items-center gap-3 max-w-xs",
+                  "h-auto p-2 flex items-center gap-3 max-w-xs",
                   isPrev ? "flex-row" : "flex-row-reverse"
                )}
             >
@@ -102,7 +102,7 @@ export function LessonNavigation({
    return (
       <nav
          className={cn(
-            "flex items-center justify-between gap-4 p-6 border-t border-border",
+            "flex items-center justify-between gap-4 p-3 border-t border-border",
             className
          )}
          aria-label='Lesson navigation'

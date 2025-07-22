@@ -41,6 +41,12 @@ export function AdminHeader() {
                      Dashboard
                   </Link>
                   <Link
+                     href='/admin/courses'
+                     className='transition-colors hover:text-foreground/80 text-foreground/60'
+                  >
+                     Course Management
+                  </Link>
+                  <Link
                      href='/dashboard'
                      className='transition-colors hover:text-foreground/80 text-foreground/60'
                   >
@@ -50,7 +56,7 @@ export function AdminHeader() {
                      href='/courses'
                      className='transition-colors hover:text-foreground/80 text-foreground/60'
                   >
-                     Courses
+                     Browse Courses
                   </Link>
                </nav>
             </div>
@@ -61,11 +67,11 @@ export function AdminHeader() {
                      <DropdownMenuTrigger asChild>
                         <Button
                            variant='ghost'
-                           className='relative h-8 w-8 rounded-full'
+                           className='relative border-2 size-10 border-muted rounded-full'
                         >
-                           <div className='h-8 w-8 rounded-full bg-muted flex items-center justify-center'>
-                              <User className='h-4 w-4' />
-                           </div>
+                           {/* <div className=' rounded-full bg-muted flex items-center justify-center '> */}
+                           <User className='size-4' />
+                           {/* </div> */}
                         </Button>
                      </DropdownMenuTrigger>
                      <DropdownMenuContent
@@ -91,6 +97,13 @@ export function AdminHeader() {
                               Admin Dashboard
                            </Link>
                         </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                           <Link href='/admin/courses'>
+                              <BookOpen className='mr-2 h-4 w-4' />
+                              Course Management
+                           </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>
                            <Link href='/dashboard'>
                               <BarChart3 className='mr-2 h-4 w-4' />

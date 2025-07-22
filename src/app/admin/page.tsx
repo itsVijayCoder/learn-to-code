@@ -24,6 +24,7 @@ import {
    Palette,
 } from "lucide-react";
 import Link from "next/link";
+import { IconButton } from "@/components/ui";
 
 export const metadata: Metadata = {
    title: "Admin Dashboard - Learn To Code",
@@ -33,6 +34,60 @@ export const metadata: Metadata = {
 export default function AdminDashboardPage() {
    return (
       <div className='space-y-8'>
+         {/* Featured: Course Management System */}
+         <Card className='border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50'>
+            <CardHeader>
+               <CardTitle className='flex items-center gap-3 text-blue-800'>
+                  <BookOpen className='h-6 w-6' />
+                  Course Management System
+                  <Badge variant='default' className='bg-blue-600'>
+                     Ready
+                  </Badge>
+               </CardTitle>
+               <CardDescription className='text-blue-700'>
+                  Complete functional programming-based course management with
+                  CRUD operations, analytics, and interactive demos.
+               </CardDescription>
+            </CardHeader>
+            <CardContent className='space-y-4'>
+               <div className='grid grid-cols-1 md:grid-cols-3 gap-4 text-sm'>
+                  <div className='flex items-center gap-2 text-blue-700'>
+                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     Zero Classes - Pure Functions
+                  </div>
+                  <div className='flex items-center gap-2 text-blue-700'>
+                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     SOLID & DRY Principles
+                  </div>
+                  <div className='flex items-center gap-2 text-blue-700'>
+                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     Real-time Analytics
+                  </div>
+               </div>
+               <div className='flex gap-3'>
+                  <Link href='/admin/courses'>
+                     <IconButton
+                        leftIcon={<BookOpen />}
+                        className='bg-blue-600 hover:bg-blue-700'
+                     >
+                        {/* <BookOpen className='h-4 w-4 mr-2' /> */}
+                        Open Course Management
+                     </IconButton>
+                  </Link>
+                  <Link href='/admin/courses' className='flex items-center'>
+                     <IconButton
+                        variant='outline'
+                        leftIcon={<Activity />}
+                        className='border-blue-300 text-blue-700 hover:bg-blue-100'
+                     >
+                        {/* <Activity className='h-4 w-4 mr-2' /> */}
+                        View Functional Demo
+                     </IconButton>
+                  </Link>
+               </div>
+            </CardContent>
+         </Card>
+
          {/* Quick Stats */}
          <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
             <Card>
@@ -97,34 +152,53 @@ export default function AdminDashboardPage() {
          </div>
 
          {/* Development Notice */}
-         <Card className='border-orange-200 bg-orange-50'>
+         <Card className='border-green-200 bg-green-50'>
             <CardHeader>
-               <CardTitle className='flex items-center gap-2 text-orange-800'>
-                  <AlertCircle className='h-5 w-5' />
-                  Admin Dashboard In Development
+               <CardTitle className='flex items-center gap-2 text-green-800'>
+                  <CheckCircle2 className='h-5 w-5' />
+                  Course Management System Ready
                </CardTitle>
-               <CardDescription className='text-orange-700'>
-                  The full admin dashboard is currently being developed. Basic
-                  functionality is available.
+               <CardDescription className='text-green-700'>
+                  Full functional programming-based course management system is
+                  now available with CRUD operations, analytics, and more.
                </CardDescription>
             </CardHeader>
-            <CardContent className='text-orange-700'>
-               <p className='mb-4'>Coming soon:</p>
+            <CardContent className='text-green-700'>
+               <p className='mb-4'>✅ Now Available:</p>
                <ul className='space-y-2 mb-6'>
                   <li className='flex items-center gap-2'>
                      <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     Complete course CRUD operations
+                  </li>
+                  <li className='flex items-center gap-2'>
+                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     Functional programming architecture (no classes)
+                  </li>
+                  <li className='flex items-center gap-2'>
+                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     Course analytics and metrics
+                  </li>
+                  <li className='flex items-center gap-2'>
+                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     Search and filtering capabilities
+                  </li>
+                  <li className='flex items-center gap-2'>
+                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     Interactive functional programming demos
+                  </li>
+               </ul>
+               <p className='mb-4'>🚧 Coming soon:</p>
+               <ul className='space-y-2 mb-6'>
+                  <li className='flex items-center gap-2'>
+                     <AlertCircle className='h-4 w-4 text-orange-600' />
                      User management interface
                   </li>
                   <li className='flex items-center gap-2'>
-                     <CheckCircle2 className='h-4 w-4 text-green-600' />
-                     Course CRUD operations
-                  </li>
-                  <li className='flex items-center gap-2'>
-                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     <AlertCircle className='h-4 w-4 text-orange-600' />
                      Advanced analytics dashboard
                   </li>
                   <li className='flex items-center gap-2'>
-                     <CheckCircle2 className='h-4 w-4 text-green-600' />
+                     <AlertCircle className='h-4 w-4 text-orange-600' />
                      Content management tools
                   </li>
                </ul>
@@ -223,13 +297,15 @@ export default function AdminDashboardPage() {
                      <Button
                         variant='outline'
                         className='w-full justify-start'
-                        disabled
+                        asChild
                      >
-                        <BookOpen className='h-4 w-4 mr-2' />
-                        Manage Courses
-                        <Badge variant='secondary' className='ml-auto'>
-                           Soon
-                        </Badge>
+                        <Link href='/admin/courses'>
+                           <BookOpen className='h-4 w-4 mr-2' />
+                           Course Management
+                           <Badge variant='success' className='ml-auto'>
+                              Available
+                           </Badge>
+                        </Link>
                      </Button>
                      <Button
                         variant='outline'

@@ -56,37 +56,7 @@ export default function AdminUITestPage() {
             <CardContent className='space-y-6'>
                <section>
                   <h3 className='text-lg font-semibold mb-3'>
-                     Button Component with Icons
-                  </h3>
-                  <div className='flex flex-wrap gap-3'>
-                     <Button leftIcon={<Plus />}>Add Item</Button>
-                     <Button rightIcon={<ArrowRight />} variant='outline'>
-                        Continue
-                     </Button>
-                     <Button
-                        leftIcon={<Download />}
-                        rightIcon={<ArrowRight />}
-                        variant='secondary'
-                     >
-                        Download & Continue
-                     </Button>
-                     <Button leftIcon={<Upload />} size='sm' iconSize='sm'>
-                        Small Upload
-                     </Button>
-                     <Button
-                        rightIcon={<Minus />}
-                        size='lg'
-                        iconSize='lg'
-                        variant='destructive'
-                     >
-                        Large Remove
-                     </Button>
-                  </div>
-               </section>
-
-               <section>
-                  <h3 className='text-lg font-semibold mb-3'>
-                     IconButton Component
+                     Button Component with Icons & Animations
                   </h3>
                   <div className='flex flex-wrap gap-3'>
                      <IconButton leftIcon={<Plus />}>Add Item</IconButton>
@@ -111,21 +81,84 @@ export default function AdminUITestPage() {
                      >
                         Large Remove
                      </IconButton>
+                     <IconButton leftIcon={<Star />} iconSize='lg'>
+                        Gradient with Icon
+                     </IconButton>
+                     <IconButton rightIcon={<Heart />} iconSize='md'>
+                        Glass Effect
+                     </IconButton>
                   </div>
+               </section>
+
+               <section>
+                  <h3 className='text-lg font-semibold mb-3'>
+                     IconButton Component with Micro-Animations
+                  </h3>
+                  <div className='flex flex-wrap gap-3'>
+                     <IconButton leftIcon={<Plus />}>Add Item</IconButton>
+                     <IconButton rightIcon={<ArrowRight />} variant='outline'>
+                        Continue
+                     </IconButton>
+                     <IconButton
+                        leftIcon={<Download />}
+                        rightIcon={<ArrowRight />}
+                        variant='secondary'
+                     >
+                        Download & Continue
+                     </IconButton>
+                     <IconButton leftIcon={<Upload />} size='sm' iconSize='sm'>
+                        Small Upload
+                     </IconButton>
+                     <IconButton
+                        rightIcon={<Minus />}
+                        size='lg'
+                        iconSize='lg'
+                        variant='destructive'
+                     >
+                        Large Remove
+                     </IconButton>
+                     <IconButton leftIcon={<Star />} iconSize='xl'>
+                        XL Gradient Icons
+                     </IconButton>
+                     <IconButton rightIcon={<Heart />} iconSize='lg'>
+                        Glass with Animation
+                     </IconButton>
+                  </div>
+                  <p className='text-sm text-muted-foreground mt-2'>
+                     Hover over IconButtons to see micro-animations: left icons
+                     move left (-translate-x), right icons move right
+                     (+translate-x)
+                  </p>
                </section>
 
                <section>
                   <h3 className='text-lg font-semibold mb-3'>Loading States</h3>
                   <div className='flex flex-wrap gap-3'>
-                     <Button leftIcon={<Plus />} isLoading>
-                        Loading...
-                     </Button>
+                     <IconButton leftIcon={<Plus />} isLoading>
+                        Loading Button...
+                     </IconButton>
                      <IconButton
                         rightIcon={<ArrowRight />}
                         isLoading
                         variant='outline'
                      >
-                        Loading...
+                        Loading IconButton...
+                     </IconButton>
+                     <IconButton
+                        leftIcon={<Download />}
+                        rightIcon={<ArrowRight />}
+                        isLoading
+                        variant='secondary'
+                     >
+                        Processing...
+                     </IconButton>
+                     <IconButton
+                        leftIcon={<Upload />}
+                        isLoading
+                        variant='destructive'
+                        iconSize='lg'
+                     >
+                        Uploading...
                      </IconButton>
                   </div>
                </section>
@@ -134,16 +167,57 @@ export default function AdminUITestPage() {
                   <h3 className='text-lg font-semibold mb-3'>
                      Icon Size Variations
                   </h3>
-                  <div className='flex flex-wrap gap-3'>
-                     <Button leftIcon={<ArrowLeft />} iconSize='sm'>
-                        Small Icons
-                     </Button>
-                     <Button leftIcon={<ArrowLeft />} iconSize='md'>
-                        Medium Icons
-                     </Button>
-                     <Button leftIcon={<ArrowLeft />} iconSize='lg'>
-                        Large Icons
-                     </Button>
+                  <div className='space-y-3'>
+                     <div className='flex flex-wrap items-center gap-3'>
+                        <span className='text-sm font-medium w-20'>
+                           Button:
+                        </span>
+                        <IconButton leftIcon={<ArrowLeft />} iconSize='sm'>
+                           Small Icons
+                        </IconButton>
+                        <IconButton leftIcon={<ArrowLeft />} iconSize='md'>
+                           Medium Icons
+                        </IconButton>
+                        <IconButton leftIcon={<ArrowLeft />} iconSize='lg'>
+                           Large Icons
+                        </IconButton>
+                        <IconButton leftIcon={<ArrowLeft />} iconSize='xl'>
+                           XL Icons
+                        </IconButton>
+                     </div>
+                     <div className='flex flex-wrap items-center gap-3'>
+                        <span className='text-sm font-medium w-20'>
+                           IconButton:
+                        </span>
+                        <IconButton
+                           leftIcon={<Star />}
+                           iconSize='sm'
+                           variant='outline'
+                        >
+                           Small
+                        </IconButton>
+                        <IconButton
+                           leftIcon={<Star />}
+                           iconSize='md'
+                           variant='outline'
+                        >
+                           Medium
+                        </IconButton>
+                        <IconButton
+                           leftIcon={<Star />}
+                           iconSize='lg'
+                           variant='outline'
+                        >
+                           Large
+                        </IconButton>
+                        <IconButton
+                           leftIcon={<Star />}
+                           iconSize='xl'
+                           variant='outline'
+                        >
+                           Extra Large
+                        </IconButton>
+                     </div>
                   </div>
                </section>
 
@@ -158,8 +232,8 @@ export default function AdminUITestPage() {
                      <Button variant='ghost'>Ghost</Button>
                      <Button variant='link'>Link</Button>
                      <Button variant='destructive'>Destructive</Button>
-                     <Button variant='gradient'>Gradient</Button>
-                     <Button variant='glass'>Glass</Button>
+                     {/* <Button variant='gradient'>Gradient</Button>
+                     <Button variant='glass'>Glass</Button> */}
                   </div>
                </section>
 
@@ -169,16 +243,16 @@ export default function AdminUITestPage() {
                      <Button size='sm'>Small</Button>
                      <Button size='default'>Default</Button>
                      <Button size='lg'>Large</Button>
-                     <Button size='xl'>Extra Large</Button>
+                     {/* <Button size='xl'>Extra Large</Button> */}
                      <Button size='icon'>
                         <Plus />
                      </Button>
-                     <Button size='icon-sm'>
+                     {/* <Button size='icon-sm'>
                         <Plus />
                      </Button>
                      <Button size='icon-lg'>
                         <Plus />
-                     </Button>
+                     </Button> */}
                   </div>
                </section>
             </CardContent>
@@ -395,9 +469,9 @@ export default function AdminUITestPage() {
                   </h3>
                   <div className='flex flex-wrap gap-3'>
                      <Button disabled>Disabled Button</Button>
-                     <Button disabled leftIcon={<Plus />}>
+                     <IconButton disabled leftIcon={<Plus />}>
                         Disabled with Icon
-                     </Button>
+                     </IconButton>
                      <Badge className='opacity-50 cursor-not-allowed'>
                         Disabled Badge
                      </Badge>
